@@ -12,8 +12,18 @@ import LearningPlanDetails from "./LearningPlanDetails";
 
 type IFormInput = z.infer<typeof learningPlannerSchema>;
 
+interface LearningPlan {
+  skillLevel: string;
+  timePerWeek: number;
+  learningStyles: string[];
+  technologies: string[];
+  goalTimeline: string;
+  resourceType: string;
+}
+
 const LearningPlannerForm: React.FC = () => {
-  const [learningPlan, setLearningPlan] = useState(null);
+  const [learningPlan, setLearningPlan] = useState<LearningPlan | null>(null);
+
   const [successSubmit, setSuccessSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -80,12 +90,12 @@ const LearningPlannerForm: React.FC = () => {
   if (successSubmit) {
     return (
       <LearningPlanDetails
-        skillLevel={learningPlan.skillLevel}
-        timePerWeek={learningPlan.timePerWeek}
-        learningStyles={learningPlan.learningStyles}
-        technologies={learningPlan.technologies}
-        goalTimeline={learningPlan.goalTimeline}
-        resourceType={learningPlan.resourceType}
+        skillLevel={learningPlan!.skillLevel}
+        timePerWeek={learningPlan!.timePerWeek}
+        learningStyles={learningPlan!.learningStyles}
+        technologies={learningPlan!.technologies}
+        goalTimeline={learningPlan!.goalTimeline}
+        resourceType={learningPlan!.resourceType}
       />
     );
   }
